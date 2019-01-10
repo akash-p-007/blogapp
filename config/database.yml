@@ -1,0 +1,16 @@
+development:
+  adapter: postgresql
+  encoding: utf8
+  user: akash
+  password: akash
+  database: blogapp_db #reonespot_prod_3
+  host: localhost
+
+test: &test
+  adapter: postgresql
+  encoding: utf8
+  user: akash
+  password: akash
+  database: blogapp_test
+  host: localhost  
+
