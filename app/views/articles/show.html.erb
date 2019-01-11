@@ -10,5 +10,42 @@
   <%= @article.content %>
 </p>
 
+<p>
+  <strong>Author:</strong>
+  <%= @article.user.name %>
+</p>
+
 <%= link_to 'Edit', edit_article_path(@article) %> |
 <%= link_to 'Back', articles_path %>
+
+
+<h2>Comments</h2>
+<% @article.comments.each do |comment| %>
+  <p>
+    <strong>Commenter:</strong>
+    <%= comment.commenter %>
+  </p>
+ 
+  <p>
+    <strong>Comment:</strong>
+    <%= comment.body %>
+  </p>
+<% end %>
+<%if user_signed_in? %>
+<%= form_with(model: [ @article, @article.comments.build ], local: true) do |form| %>
+  <p>
+    <%= form.hidden_field :commenter, :value => @article.user.name %>
+  </p>
+  <div class="container pb-cmnt-container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <%= form.text_area :body, placeholder: "Add a comment", cols: 30 %>
+            <%= form.submit %>
+          </div>  
+        </div>
+      </div>
+  </div>
+<% end %>
+<% end %>
